@@ -1,0 +1,22 @@
+/* basic spacing for dialog inputs */
+.p-fluid .p-inputtext,
+.p-fluid .p-inputnumber,
+.p-fluid .p-calendar {
+  width: 100%;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Ensure ngx-bootstrap datepicker appears above PrimeNG dialog overlay */
+.bs-datepicker {
+  z-index: 2000 !important;
+}

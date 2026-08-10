@@ -1,4 +1,6 @@
 const express = require('express');
+const authenticate = require('../middleware/auth.middleware');
+const authorize = require('../middleware/role.middleware');
 
 const {
   createEmployee,
@@ -11,11 +13,11 @@ const {
 
 const router = express.Router();
 
-router.post('/', createEmployee);
-router.get('/', getAllEmployees);
-router.get('/:id', getEmployeeById);
-router.put('/:id', updateEmployee);
-router.patch('/:id/status', updateEmployeeStatus);
-router.delete('/:id', deleteEmployee);
+router.get('/', authenticate, getAllEmployees);
+router.get('/:id', authenticate, getEmployeeById);
+router.post('/', authenticate, authorize('admin'), createEmployee);
+router.put('/:id', authenticate, authorize('admin'), updateEmployee);
+router.patch('/:id/status', authenticate, authorize('admin'), updateEmployeeStatus);
+router.delete('/:id', authenticate, authorize('admin'), deleteEmployee);
 
 module.exports = router;

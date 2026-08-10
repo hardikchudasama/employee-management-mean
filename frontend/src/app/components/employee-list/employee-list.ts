@@ -26,6 +26,7 @@ import {
   debounceTime,
   distinctUntilChanged
 } from 'rxjs';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-employee-list',
@@ -165,12 +166,18 @@ export class EmployeeList {
     }
   ];
 
+  isAdmin = false;
+
+
 
   constructor(
     private employeeService: EmployeeService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
-  ) {}
+    private confirmationService: ConfirmationService,
+    public authService: AuthService
+  ) {
+    this.isAdmin = this.authService.isAdmin();
+  }
 
 
   // ================================
@@ -178,6 +185,7 @@ export class EmployeeList {
   // ================================
 
   ngOnInit(): void {
+    
 
     this.loadEmployees();
 

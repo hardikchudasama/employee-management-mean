@@ -1,17 +1,4 @@
 <!-- ========================================= -->
-<!-- Page Header -->
-<!-- ========================================= -->
-
-<div class="employee-header">
-
-    <div class="text-center">
-        <h2>Employee Management</h2>
-    </div>
-
-</div>
-
-
-<!-- ========================================= -->
 <!-- Toast / Confirmation -->
 <!-- ========================================= -->
 
@@ -63,9 +50,11 @@
     <!-- Add Employee -->
     <!-- =============================== -->
 
-    <p-button label="Add Employee" icon="pi pi-plus" (click)="openAdd()">
-    </p-button>
-
+    
+    @if(isAdmin) {
+        <p-button label="Add Employee" class="mt-3" icon="pi pi-plus" (click)="openAdd()"></p-button>
+    }
+    
 </div>
 
 
@@ -186,11 +175,12 @@
 
             <!-- Actions -->
 
-            <th>
-
+            @if(isAdmin) {
+                <th>
                 Actions
-
             </th>
+            }
+            
 
 
         </tr>
@@ -273,7 +263,8 @@
 
             <!-- Status -->
 
-            <td [ngClass]="{ 'status-active': employee.status === 'Active', 'status-inactive': employee.status !== 'Active' }">
+            <td
+                [ngClass]="{ 'status-active': employee.status === 'Active', 'status-inactive': employee.status !== 'Active' }">
 
                 {{ employee.status }}
 
@@ -284,56 +275,37 @@
 
             <td class="actions">
 
-
-                <!-- Edit -->
-
-                <p-button label="Edit" icon="pi pi-pencil" severity="info" size="small" (click)="openEdit(employee)">
-                </p-button>
-
-                <!-- Activate / Deactivate -->
-                <p-button [label]="employee.status === 'Active'
-            ? 'Deactivate'
-            : 'Activate'" [icon]="employee.status === 'Active'
-            ? 'pi pi-ban'
-            : 'pi pi-check'" [severity]="employee.status === 'Active'
-            ? 'warn'
-            : 'success'" size="small" (click)="toggleEmployeeStatus(employee)">
-                </p-button>
-
-
-                <!-- Delete -->
-
-                <p-button label="Delete" icon="pi pi-trash" severity="danger" size="small"
-                    (click)="confirmDelete(employee)">
-                </p-button>
-
+                @if (isAdmin) {
+                    <p-button label="Edit" icon="pi pi-pencil" severity="info" size="small" (click)="openEdit(employee)">
+                    </p-button>
+    
+                    <!-- Activate / Deactivate -->
+                    <p-button [label]="employee.status === 'Active'
+                        ? 'Deactivate'
+                        : 'Activate'" [icon]="employee.status === 'Active'
+                        ? 'pi pi-ban'
+                        : 'pi pi-check'" [severity]="employee.status === 'Active'
+                        ? 'warn'
+                        : 'success'" size="small" (click)="toggleEmployeeStatus(employee)">
+                    </p-button>
+                    <p-button label="Delete" icon="pi pi-trash" severity="danger" size="small" (click)="confirmDelete(employee)"></p-button>
+                }
+                
+            
 
             </td>
 
         </tr>
 
     </ng-template>
-
-
-    <!-- ===================================== -->
-    <!-- Empty State -->
-    <!-- ===================================== -->
 
     <ng-template #emptymessage>
-
         <tr>
-
             <td colspan="9">
-
                 No employees found.
-
             </td>
-
         </tr>
-
     </ng-template>
-
-
 </p-table>
 
 

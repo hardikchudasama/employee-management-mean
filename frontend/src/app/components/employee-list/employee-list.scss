@@ -5,6 +5,29 @@
 
 .toolbar {
   margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filter-dropdown {
+  min-width: 200px;
+  margin-right: 0.5rem;
+}
+
+.reset-button {
+  margin-left: 0.25rem;
+}
+
+.status-active {
+  color: #198754;
+  font-weight: 600;
+}
+
+.status-inactive {
+  color: #d97706;
+  font-weight: 600;
 }
 
 .loading-overlay {

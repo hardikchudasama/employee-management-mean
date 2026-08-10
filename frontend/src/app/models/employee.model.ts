@@ -10,4 +10,5 @@ export interface Employee {
   joiningDate: string;
   createdAt?: string;
   updatedAt?: string;
+  status?: 'Active' | 'Inactive';
 }

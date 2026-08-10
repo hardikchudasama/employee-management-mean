@@ -1,10 +1,13 @@
-/* basic spacing for dialog inputs */
-.p-fluid .p-inputtext,
-.p-fluid .p-inputnumber,
-.p-fluid .p-calendar {
-  width: 100%;
+/* PrimeNG form controls */
+.p-fluid {
+  .p-inputtext,
+  .p-inputnumber,
+  .p-calendar {
+    width: 100%;
+  }
 }
 
+/* Form field */
 .form-field {
   display: flex;
   flex-direction: column;
@@ -16,7 +19,44 @@
   }
 }
 
-/* Ensure ngx-bootstrap datepicker appears above PrimeNG dialog overlay */
-.bs-datepicker {
-  z-index: 2000 !important;
+/* Employee form */
+.employee-form {
+  width: 100%;
+}
+
+/* Form labels */
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+/* Required field indicator */
+.required {
+  color: red;
+  margin-left: 2px;
+}
+
+/* Validation messages */
+.validation-message {
+  display: block;
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Input controls */
+.form-control {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Full width PrimeNG controls */
+.w-full {
+  width: 100%;
+}
+
+/* Datepicker */
+.p-datepicker {
+  width: 100%;
 }

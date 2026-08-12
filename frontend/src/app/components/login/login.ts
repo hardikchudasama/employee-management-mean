@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -42,7 +43,7 @@ export class Login {
 
     const credentials = this.loginForm.getRawValue();
 
-    this.authService.login(credentials).subscribe({
+    this.authService.login(credentials).pipe(finalize(() => this.loading = false)).subscribe({
       next: (response) => {
         this.loading = false;
 
@@ -56,13 +57,6 @@ export class Login {
 
           this.router.navigate(['/employees']);
         }
-      },
-
-      error: (error) => {
-        this.loading = false;
-
-        this.errorMessage =
-          error.error?.message || 'Invalid email or password';
       }
     });
   }

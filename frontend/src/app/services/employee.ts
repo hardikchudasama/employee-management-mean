@@ -28,6 +28,12 @@ export interface EmployeeQueryParams {
   status?: string;
 }
 
+export interface SingleEmployeeResponse {
+  success: boolean;
+  message: string;
+  data: Employee;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,7 +41,7 @@ export class EmployeeService {
 
   private apiUrl = environment.apiUrl + '/employees';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllEmployees(params: EmployeeQueryParams = {}): Observable<EmployeeResponse> {
 
@@ -76,14 +82,14 @@ export class EmployeeService {
   }
 
   updateEmployeeStatus(
-  id: string,
-  status: 'Active' | 'Inactive'
-): Observable<any> {
-  return this.http.patch(
-    `${this.apiUrl}/${id}/status`,
-    { status }
-  );
-}
+    id: string,
+    status: 'Active' | 'Inactive'
+  ): Observable<any> {
+    return this.http.patch(
+      `${this.apiUrl}/${id}/status`,
+      { status }
+    );
+  }
 
   createEmployee(payload: Employee): Observable<any> {
     return this.http.post(this.apiUrl, payload);
@@ -91,6 +97,12 @@ export class EmployeeService {
 
   updateEmployee(id: string, payload: Employee): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, payload);
+  }
+
+  getEmployeeById(id: string): Observable<SingleEmployeeResponse> {
+    return this.http.get<SingleEmployeeResponse>(
+      `${this.apiUrl}/${id}`
+    );
   }
 
   deleteEmployee(id: string): Observable<any> {

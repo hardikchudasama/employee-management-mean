@@ -22,18 +22,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
       switch (error.status) {
 
-        case 401:
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
-
-          notificationService.error(
-            'Your session has expired. Please login again.',
-            'Session Expired'
-          );
-
-          router.navigate(['/login']);
-          break;
-
         case 403:
           notificationService.error(
             error.error?.message ||
@@ -47,6 +35,15 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             error.error?.message ||
             'Requested resource was not found.',
             'Not Found'
+          );
+          break;
+
+        case 409:
+          console.log("innn");
+          
+          notificationService.error(
+            error.error?.message || 'This email is already registered.',
+            'Registration Failed'
           );
           break;
 

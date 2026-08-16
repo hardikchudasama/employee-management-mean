@@ -10,62 +10,59 @@
 
       <!-- Email -->
       <div class="form-field">
-        <label for="email">Email</label>
+        <label for="email">
+          Email <span class="required">*</span>
+        </label>
 
-        <input
-          id="email"
-          type="email"
-          formControlName="email"
-          placeholder="Enter your email"
-        />
+        <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
 
         @if (email.touched && email.hasError('required')) {
-          <small class="error">
-            Email is required
-          </small>
+        <small class="error">
+          Email is required
+        </small>
         }
 
         @if (email.touched && email.hasError('email')) {
-          <small class="error">
-            Please enter a valid email address
-          </small>
+        <small class="error">
+          Please enter a valid email address
+        </small>
         }
       </div>
 
       <!-- Password -->
       <div class="form-field">
-        <label for="password">Password</label>
+        <label for="password">
+          Password <span class="required">*</span>
+        </label>
 
-        <input
-          id="password"
-          type="password"
-          formControlName="password"
-          placeholder="Enter your password"
-        />
+        <input id="password" type="password" formControlName="password" placeholder="Enter your password" />
 
         @if (password.touched && password.hasError('required')) {
-          <small class="error">
-            Password is required
-          </small>
+        <small class="error">
+          Password is required
+        </small>
         }
       </div>
 
       <!-- API Error -->
       @if (errorMessage) {
-        <div class="api-error">
-          {{ errorMessage }}
-        </div>
+      <div class="api-error">
+        {{ errorMessage }}
+      </div>
       }
 
       <!-- Submit -->
-      <button
-  type="submit"
-  [disabled]="loginForm.invalid || loading"
->
-  {{ loading ? 'Logging in...' : 'Login' }}
-</button>
+      <button type="submit" [disabled]="loginForm.invalid || loading">
+        {{ loading ? 'Logging in...' : 'Login' }}
+      </button>
 
     </form>
+
+    <!-- Register Link -->
+    <div class="register-link">
+      Don't have an account?
+      <a routerLink="/register">Register</a>
+    </div>
 
   </div>
 </div>

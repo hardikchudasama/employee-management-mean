@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -6,7 +6,7 @@
   background: #f5f5f5;
 }
 
-.login-card {
+.register-card {
   width: 400px;
   padding: 30px;
   background: white;
@@ -14,7 +14,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.login-header {
+.register-header {
   text-align: center;
   margin-bottom: 25px;
 
@@ -80,7 +80,7 @@ button {
   }
 }
 
-.register-link {
+.login-link {
   margin-top: 15px;
   text-align: center;
 

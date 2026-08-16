@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,15 @@ export class Navbar {
   }
 
   logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
+  this.authService.logout()
+    .pipe(
+      finalize(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+
+        this.router.navigate(['/login']);
+      })
+    )
+    .subscribe();
+}
 }

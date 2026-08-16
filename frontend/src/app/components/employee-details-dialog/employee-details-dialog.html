@@ -1,0 +1,93 @@
+<p-dialog
+  header="Employee Details"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '550px' }"
+  (onShow)="onShow()"
+  (onHide)="close()"
+>
+
+  @if (loading) {
+
+    <div class="loading-container">
+      <p>Loading employee details...</p>
+    </div>
+
+  } @else if (employee) {
+
+    <div class="employee-details">
+
+      <div class="detail-row">
+        <span class="label">Name</span>
+        <span class="value">
+          {{ employee.firstName }} {{ employee.lastName }}
+        </span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Email</span>
+        <span class="value">
+          {{ employee.email }}
+        </span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Phone</span>
+        <span class="value">
+          {{ employee.phone }}
+        </span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Department</span>
+        <span class="value">
+          {{ employee.department }}
+        </span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Designation</span>
+        <span class="value">
+          {{ employee.designation }}
+        </span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Salary</span>
+        <span class="value">
+          {{ employee.salary }}
+        </span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Joining Date</span>
+        <span class="value">
+          {{ employee.joiningDate | date: 'dd/MM/yyyy' }}
+        </span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Status</span>
+        <span
+          class="value"
+          [class.status-active]="employee.status === 'Active'"
+          [class.status-inactive]="employee.status !== 'Active'"
+        >
+          {{ employee.status }}
+        </span>
+      </div>
+
+    </div>
+
+  }
+
+  <ng-template #footer>
+    <p-button
+      label="Close"
+      severity="secondary"
+      size="small"
+      (click)="close()">
+    </p-button>
+  </ng-template>
+
+</p-dialog>

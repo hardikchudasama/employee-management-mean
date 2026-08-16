@@ -1,0 +1,115 @@
+<div class="register-container">
+    <div class="register-card">
+
+        <div class="register-header">
+            <h2>Employee Management</h2>
+            <p>Create your account</p>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+            <!-- Name -->
+            <div class="form-field">
+                <label for="name">
+                    Name <span class="required">*</span>
+                </label>
+
+                <input id="name" type="text" formControlName="name" placeholder="Enter your name" />
+
+                @if (name.touched && name.hasError('required')) {
+                <small class="error">
+                    Name is required
+                </small>
+                }
+
+                @if (name.touched && name.hasError('minlength')) {
+                <small class="error">
+                    Name must be at least 2 characters
+                </small>
+                }
+            </div>
+
+            <!-- Email -->
+            <div class="form-field">
+                <label for="email">
+                    Email <span class="required">*</span>
+                </label>
+
+                <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
+
+                @if (email.touched && email.hasError('required')) {
+                <small class="error">
+                    Email is required
+                </small>
+                }
+
+                @if (email.touched && email.hasError('email')) {
+                <small class="error">
+                    Please enter a valid email address
+                </small>
+                }
+            </div>
+
+            <!-- Password -->
+            <div class="form-field">
+                <label for="password">
+                    Password <span class="required">*</span>
+                </label>
+
+                <input id="password" type="password" formControlName="password" placeholder="Enter your password" />
+
+                @if (password.touched && password.hasError('required')) {
+                <small class="error">
+                    Password is required
+                </small>
+                }
+
+                @if (password.touched && password.hasError('minlength')) {
+                <small class="error">
+                    Password must be at least 6 characters
+                </small>
+                }
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-field">
+                <label for="confirmPassword">
+                    Confirm Password <span class="required">*</span>
+                </label>
+
+                <input id="confirmPassword" type="password" formControlName="confirmPassword"
+                    placeholder="Confirm your password" />
+
+                @if (confirmPassword.touched && confirmPassword.hasError('required')) {
+                <small class="error">
+                    Confirm password is required
+                </small>
+                }
+
+                @if (
+                confirmPassword.touched &&
+                registerForm.hasError('passwordMismatch')
+                ) {
+                <small class="error">
+                    Passwords do not match
+                </small>
+                }
+            </div>
+
+            <!-- API Error -->
+
+            <!-- Submit -->
+            <button type="submit" [disabled]="registerForm.invalid || loading">
+                {{ loading ? 'Registering...' : 'Register' }}
+            </button>
+
+            <!-- Login Link -->
+            <div class="login-link">
+                Already have an account?
+                <a routerLink="/login">Login</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>

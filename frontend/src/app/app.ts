@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { EmployeeList } from './components/employee-list/employee-list';
+import { Toast } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, EmployeeList],
+  imports: [RouterOutlet,Toast],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })

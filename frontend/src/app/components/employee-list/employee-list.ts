@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormsModule,
@@ -30,6 +30,8 @@ import { AuthService } from '../../services/auth';
 import { EmployeeService } from '../../services/employee';
 import { NotificationService } from '../../services/notification';
 import { EmployeeDialog } from '../employee-dialog/employee-dialog';
+import { Router } from '@angular/router';
+import { EmployeeDetailsDialog } from '../employee-details-dialog/employee-details-dialog';
 
 @Component({
   selector: 'app-employee-list',
@@ -47,7 +49,8 @@ import { EmployeeDialog } from '../employee-dialog/employee-dialog';
     ToastModule,
     ConfirmDialogModule,
     ProgressSpinnerModule,
-    EmployeeDialog
+    EmployeeDialog,
+    EmployeeDetailsDialog
   ],
   providers: [
     ConfirmationService
@@ -57,8 +60,13 @@ import { EmployeeDialog } from '../employee-dialog/employee-dialog';
 })
 export class EmployeeList {
 
+  private router = inject(Router);
+
   // Employee data
   employees: Employee[] = [];
+
+  showDetailsDialog = false;
+  selectedEmployeeId: string | null = null;
 
   // UI state
   loading = false;
@@ -394,4 +402,9 @@ export class EmployeeList {
       }
     });
   }
+
+  viewEmployee(id: string): void {
+  this.selectedEmployeeId = id;
+  this.showDetailsDialog = true;
+}
 }

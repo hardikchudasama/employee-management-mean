@@ -28,6 +28,12 @@ const userSchema = new mongoose.Schema(
       default: 'user',
     },
 
+    status: {
+      type: String,
+      enum: ['Active', 'Inactive'],
+      default: 'Active',
+    },
+
     refreshTokenHash: {
       type: String,
       default: null

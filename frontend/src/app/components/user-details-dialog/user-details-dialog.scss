@@ -1,0 +1,59 @@
+.user-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid #eee;
+}
+
+.label {
+    font-weight: 600;
+    color: #555;
+}
+
+.value {
+    color: #333;
+}
+
+.role-badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.role-admin {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.role-user {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.status-active {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.status-inactive {
+    color: #d32f2f;
+    font-weight: 600;
+}
+
+.loading-container {
+    min-height: 200px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

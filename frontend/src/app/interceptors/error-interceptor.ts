@@ -22,6 +22,14 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
       switch (error.status) {
 
+        case 401:
+          notificationService.error(
+            error.error?.message ||
+            'Unauthorize user. Please login to continue.',
+            'Access Denied'
+          );
+          break;
+
         case 403:
           notificationService.error(
             error.error?.message ||

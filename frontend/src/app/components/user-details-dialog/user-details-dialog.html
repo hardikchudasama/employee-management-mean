@@ -1,0 +1,106 @@
+<p-dialog
+    header="User Details"
+    [(visible)]="visible"
+    [modal]="true"
+    [closable]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '500px' }"
+    (onHide)="onClose()"
+>
+
+    <!-- Loading -->
+    @if (loading) {
+
+        <div class="loading-container">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+
+    }
+
+    <!-- User Details -->
+    @if (!loading && user) {
+
+        <div class="user-details">
+
+            <!-- Name -->
+            <div class="detail-row">
+                <span class="label">Name</span>
+                <span class="value">
+                    {{ user.name }}
+                </span>
+            </div>
+
+            <!-- Email -->
+            <div class="detail-row">
+                <span class="label">Email</span>
+                <span class="value">
+                    {{ user.email }}
+                </span>
+            </div>
+
+            <!-- Role -->
+            <div class="detail-row">
+                <span class="label">Role</span>
+
+                <span
+                    class="role-badge"
+                    [ngClass]="{
+                        'role-admin': user.role === 'admin',
+                        'role-user': user.role === 'user'
+                    }"
+                >
+                    {{ user.role | titlecase }}
+                </span>
+            </div>
+
+            <!-- Status -->
+            <div class="detail-row">
+                <span class="label">Status</span>
+
+                <span
+                    [ngClass]="{
+                        'status-active': user.status === 'Active',
+                        'status-inactive': user.status === 'Inactive'
+                    }"
+                >
+                    {{ user.status }}
+                </span>
+            </div>
+
+            <!-- Created Date -->
+            <div class="detail-row">
+                <span class="label">Created Date</span>
+
+                <span class="value">
+                    {{ user.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+                </span>
+            </div>
+
+            <!-- Updated Date -->
+            <div class="detail-row">
+                <span class="label">Updated Date</span>
+
+                <span class="value">
+                    {{ user.updatedAt | date: 'dd/MM/yyyy HH:mm' }}
+                </span>
+            </div>
+
+        </div>
+
+    }
+
+    <!-- Footer -->
+    <ng-template #footer>
+
+        <p-button
+            label="Close"
+            severity="secondary"
+            icon="pi pi-times"
+            (click)="onClose()"
+        >
+        </p-button>
+
+    </ng-template>
+
+</p-dialog>

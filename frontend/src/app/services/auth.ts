@@ -49,9 +49,7 @@ export class AuthService {
 
   private apiUrl = environment.apiUrl + '/auth';
 
-  register(
-    credentials: RegisterRequest
-  ): Observable<RegisterResponse> {
+  register(credentials: RegisterRequest): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(
       `${this.apiUrl}/register`,
       credentials

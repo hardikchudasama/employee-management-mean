@@ -7,6 +7,8 @@ import { Login } from './components/login/login';
 import { authGuard } from './guards/auth-guard';
 import { guestGuard } from './guards/guest-guard';
 import { Register } from './components/register/register';
+import { adminGuard } from './guards/admin-guard-guard';
+import { UserList } from './components/user-list/user-list';
 
 export const routes: Routes = [
   {
@@ -24,6 +26,11 @@ export const routes: Routes = [
       {
         path: 'employees',
         component: EmployeeList
+      },
+      {
+        path: 'users',
+        component: UserList,
+        canActivate: [adminGuard]
       }
     ]
   },

@@ -70,7 +70,8 @@ const register = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      role: 'user'
+      role: 'user',
+      status: 'Active'
     });
 
     return res.status(201).json({
@@ -80,7 +81,8 @@ const register = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        role: user.role
+        role: user.role,
+        status: user.status
       }
     });
 
@@ -125,6 +127,14 @@ const login = async (req, res) => {
       return res.status(401).json({
         success: false,
         message: 'Invalid email or password'
+      });
+    }
+
+    // Check account status
+    if (user.status !== 'Active') {
+      return res.status(403).json({
+        success: false,
+        message: 'Your account is inactive. Please contact an administrator.'
       });
     }
 

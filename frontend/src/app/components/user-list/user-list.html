@@ -1,0 +1,208 @@
+<p-confirmDialog></p-confirmDialog>
+
+<div class="user-list-container">
+
+    <!-- Filters & Actions -->
+    <div class="filter-buttons">
+
+        <div class="toolbar">
+
+            <!-- Search -->
+            <input pInputText class="filter-input" type="text" placeholder="Search users..."
+                [formControl]="searchControl" />
+
+
+            <!-- Role Filter -->
+            <p-select [options]="roles" [(ngModel)]="selectedRole" optionLabel="label" optionValue="value"
+                placeholder="All Roles" (onChange)="onRoleChange()" styleClass="filter-dropdown">
+            </p-select>
+
+
+            <!-- Status Filter -->
+            <p-select [options]="statuses" [(ngModel)]="selectedStatus" optionLabel="label" optionValue="value"
+                placeholder="All Status" (onChange)="onStatusChange()" styleClass="filter-dropdown">
+            </p-select>
+
+
+            <!-- Reset -->
+            <p-button label="Reset" icon="pi pi-refresh" class="reset-button blue-reset" severity="info" size="small"
+                (click)="resetFilters()">
+            </p-button>
+
+        </div>
+
+    </div>
+
+
+    <!-- User Table -->
+    <p-table [value]="users" styleClass="p-datatable-gridlines" stripedRows [paginator]="true" [rows]="pageSize"
+        [first]="first" [totalRecords]="totalRecords" [rowsPerPageOptions]="[5, 10, 20]" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users" [lazy]="true"
+        (onPage)="onPageChange($event)" (onSort)="onSort($event)">
+
+        <!-- Header -->
+        <ng-template #header>
+
+            <tr>
+
+                <th pSortableColumn="name">
+                    Name
+                    <p-sortIcon field="name"></p-sortIcon>
+                </th>
+
+
+                <th pSortableColumn="email">
+                    Email
+                    <p-sortIcon field="email"></p-sortIcon>
+                </th>
+
+
+                <th pSortableColumn="role">
+                    Role
+                    <p-sortIcon field="role"></p-sortIcon>
+                </th>
+
+
+                <th pSortableColumn="status">
+                    Status
+                    <p-sortIcon field="status"></p-sortIcon>
+                </th>
+
+
+                <th pSortableColumn="createdAt">
+                    Created Date
+                    <p-sortIcon field="createdAt"></p-sortIcon>
+                </th>
+
+
+                <th>
+                    Actions
+                </th>
+
+            </tr>
+
+        </ng-template>
+
+
+        <!-- Body -->
+        <ng-template #body let-user>
+
+            <tr>
+
+                <!-- Name -->
+                <td>
+                    {{ user.name }}
+                </td>
+
+
+                <!-- Email -->
+                <td>
+                    {{ user.email }}
+                </td>
+
+
+                <!-- Role -->
+                <td>
+
+                    <span [ngClass]="{
+                            'role-admin': user.role === 'admin',
+                            'role-user': user.role === 'user'
+                        }">
+                        {{ user.role | titlecase }}
+                    </span>
+
+                </td>
+
+
+                <!-- Status -->
+                <td [ngClass]="{
+                        'status-active':
+                            user.status === 'Active',
+
+                        'status-inactive':
+                            user.status === 'Inactive'
+                    }">
+                    {{ user.status }}
+                </td>
+
+
+                <!-- Created Date -->
+                <td>
+                    {{ user.createdAt | date: 'dd/MM/yyyy' }}
+                </td>
+
+
+                <!-- Actions -->
+                <td class="actions">
+
+                    <p-button label="View" icon="pi pi-eye" severity="secondary" size="small"
+                        (click)="viewUser(user._id)">
+                    </p-button>
+
+
+                    <!-- Change Role -->
+                    <p-button [label]="
+            user.role === 'admin'
+                ? 'Make User'
+                : 'Make Admin'
+        " icon="pi pi-user-edit" [severity]="
+            user.role === 'admin'
+                ? 'warn'
+                : 'info'
+        " size="small" (click)="changeUserRole(user)">
+                    </p-button>
+
+
+
+                    <!-- Activate / Deactivate -->
+                    <p-button [label]="
+            user.status === 'Active'
+                ? 'Deactivate'
+                : 'Activate'
+        " [icon]="
+            user.status === 'Active'
+                ? 'pi pi-ban'
+                : 'pi pi-check'
+        " [severity]="
+            user.status === 'Active'
+                ? 'warn'
+                : 'success'
+        " size="small" (click)="toggleUserStatus(user)">
+                    </p-button>
+
+                </td>
+
+            </tr>
+
+        </ng-template>
+
+
+        <!-- Empty -->
+        <ng-template #emptymessage>
+
+            <tr>
+
+                <td colspan="6">
+                    No users found.
+                </td>
+
+            </tr>
+
+        </ng-template>
+
+    </p-table>
+
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" *ngIf="loading">
+
+        <p-progressSpinner>
+        </p-progressSpinner>
+
+    </div>
+
+</div>
+
+
+<app-user-details-dialog [(visible)]="showDetailsDialog" [userId]="selectedUserId">
+</app-user-details-dialog>

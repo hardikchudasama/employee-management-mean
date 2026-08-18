@@ -1,20 +1,47 @@
 <nav class="navbar">
   <div class="navbar-left">
-    <h2>Employee Management</h2>
+    <div class="brand-block">
+      <span class="brand-mark">EM</span>
+      <div class="brand-copy">
+        <span class="brand-name">Employee Management</span>
+      </div>
+    </div>
+
+    <div class="nav-links" [class.open]="mobileMenuOpen">
+      <a class="nav-item" routerLink="/employees" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">
+        <span class="nav-icon pi pi-users"></span>
+        <span>Employees</span>
+      </a>
+
+      @if (isAdmin) {
+        <a class="nav-item" routerLink="/users" routerLinkActive="active" (click)="closeMobileMenu()">
+          <span class="nav-icon pi pi-user"></span>
+          <span>Users</span>
+        </a>
+      }
+
+      <button type="button" class="logout-button mobile-logout" (click)="logout()">
+        <span class="pi pi-sign-out logout-icon"></span>
+        <span>Logout</span>
+      </button>
+    </div>
   </div>
 
   <div class="navbar-right">
-
     @if (user) {
       <div class="user-info">
-        <span>User: {{ user.name }}</span>
-        <small>Role: {{ user.role }}</small>
+        <span class="user-name">{{ user.name }}</span>
+        <small class="user-role">{{ user.role }}</small>
       </div>
     }
 
-    <button type="button" (click)="logout()">
-      Logout
+    <button type="button" class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+      <i class="pi" [class.pi-bars]="!mobileMenuOpen" [class.pi-times]="mobileMenuOpen"></i>
     </button>
 
+    <button type="button" class="logout-button desktop-logout" (click)="logout()">
+      <span class="pi pi-sign-out logout-icon"></span>
+      <span>Logout</span>
+    </button>
   </div>
 </nav>

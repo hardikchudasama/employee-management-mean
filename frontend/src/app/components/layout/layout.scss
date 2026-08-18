@@ -1,0 +1,12 @@
+.page-content {
+  padding: 1rem 1.5rem 2rem;
+  box-sizing: border-box;
+  min-height: calc(100vh - 72px);
+  background: #f8fafc;
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 1rem;
+  }
+}

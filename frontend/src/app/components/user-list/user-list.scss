@@ -1,90 +1,111 @@
 .user-list-container {
-    position: relative;
-}
+  position: relative;
 
-.filter-buttons {
+  .filter-buttons {
     display: flex;
     justify-content: space-between;
-}
+  }
 
-.toolbar {
+  .toolbar {
     margin: 1rem 0;
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+
     gap: 0.75rem;
-}
 
-.filter-input,
-.toolbar .p-inputtext {
-    width: 250px;
-    min-width: 250px;
-    height: 38px;
-    padding: 0.625rem 0.75rem;
-    box-sizing: border-box;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    line-height: 1.2;
-}
+    .filter-input,
+    .p-inputtext {
+      width: 250px;
+      min-width: 250px;
+      height: 38px;
 
-.filter-input:focus,
-.toolbar .p-inputtext:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.15);
-    outline: none;
-}
+      padding: 0.625rem 0.75rem;
 
-.filter-dropdown {
-    min-width: 200px;
-    margin-right: 0.5rem;
-    height: 38px;
-}
+      box-sizing: border-box;
 
-.reset-button {
-    margin-left: 0.25rem;
-}
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
 
-.role-admin,
-.role-user {
+      font-size: 0.95rem;
+      line-height: 1.2;
+
+      &:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.15);
+        outline: none;
+      }
+    }
+
+    .filter-dropdown {
+      min-width: 200px;
+      margin-right: 0.5rem;
+      height: 38px;
+    }
+
+    .reset-button {
+      margin-left: 0.25rem;
+    }
+  }
+
+  .role-admin,
+  .role-user {
     display: inline-block;
+
     padding: 4px 10px;
+
     border-radius: 4px;
+
     font-size: 13px;
     font-weight: 500;
-}
+  }
 
-.role-admin {
+  .role-admin {
     background: #e3f2fd;
     color: #1565c0;
-}
+  }
 
-.role-user {
+  .role-user {
     background: #f3e5f5;
     color: #7b1fa2;
-}
+  }
 
-.status-active {
+  .status-active {
     color: #198754;
     font-weight: 600;
-}
+  }
 
-.status-inactive {
+  .status-inactive {
     color: #d97706;
     font-weight: 600;
-}
+  }
 
-.actions {
+  .actions {
     display: flex;
-    gap: 8px;
-}
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
 
-.loading-overlay {
+    gap: 8px;
+
+    white-space: nowrap;
+
+    > * {
+      flex-shrink: 0;
+    }
+  }
+
+  .loading-overlay {
     position: fixed;
     inset: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.6);
+
+    background: rgba(255, 255, 255, 0.6);
+
     z-index: 9999;
+  }
 }

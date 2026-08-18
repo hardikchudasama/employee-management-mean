@@ -1,0 +1,168 @@
+<div class="dashboard">
+
+  <div class="dashboard-header">
+    <h2>Dashboard</h2>
+    <p class="dashboard-subtitle">Overview of your employee management system</p>
+  </div>
+
+  <div class="dashboard-loading" *ngIf="isLoading">
+    <p-progressSpinner styleClass="dashboard-spinner"></p-progressSpinner>
+    <p>Loading dashboard data...</p>
+  </div>
+
+  <div class="dashboard-error" *ngIf="hasError">
+    <div class="error-icon">
+      <i class="pi pi-exclamation-triangle"></i>
+    </div>
+    <p>{{ errorMessage }}</p>
+    <p-button label="Retry" icon="pi pi-refresh" severity="secondary" (click)="loadDashboard()"></p-button>
+  </div>
+
+  <ng-container *ngIf="!isLoading && !hasError && dashboardData">
+  <div class="stats-grid">
+
+    <div class="stat-card stat-card--blue">
+      <div class="stat-icon">
+        <i class="pi pi-users"></i>
+      </div>
+      <div class="stat-content">
+        <h3>Total Employees</h3>
+        <p>{{ totalEmployees }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card stat-card--green">
+      <div class="stat-icon">
+        <i class="pi pi-check-circle"></i>
+      </div>
+      <div class="stat-content">
+        <h3>Active Employees</h3>
+        <p>{{ activeEmployees }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card stat-card--amber">
+      <div class="stat-icon">
+        <i class="pi pi-times-circle"></i>
+      </div>
+      <div class="stat-content">
+        <h3>Inactive Employees</h3>
+        <p>{{ inactiveEmployees }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card stat-card--purple">
+      <div class="stat-icon">
+        <i class="pi pi-building"></i>
+      </div>
+      <div class="stat-content">
+        <h3>Departments</h3>
+        <p>{{ departmentCount }}</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-card">
+      <div class="card-header">
+        <h3>Employees by Department</h3>
+      </div>
+
+      <div class="chart-container">
+        <p-chart
+          type="bar"
+          [data]="departmentChartData"
+          [options]="departmentChartOptions"
+          style="height: 100%; display: block;">
+        </p-chart>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="card-header">
+        <h3>Employee Status</h3>
+      </div>
+
+      <div class="chart-container chart-container--doughnut">
+        <p-chart
+          type="doughnut"
+          [data]="statusChartData"
+          [options]="statusChartOptions"
+          style="height: 100%; display: block;">
+        </p-chart>
+      </div>
+    </div>
+  </div>
+
+  <div class="recent-employees">
+    <div class="card-header">
+      <h3>Recent Employees</h3>
+    </div>
+
+    <div class="table-scroll">
+      <p-table
+        [value]="recentEmployees"
+        styleClass="p-datatable-gridlines"
+        stripedRows
+        [paginator]="true"
+        [rows]="5"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+        [responsiveLayout]="'stack'"
+        [breakpoint]="'640px'">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="firstName">
+              Name
+              <p-sortIcon field="firstName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email">
+              Email
+              <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th pSortableColumn="department">
+              Department
+              <p-sortIcon field="department"></p-sortIcon>
+            </th>
+            <th pSortableColumn="designation">
+              Designation
+              <p-sortIcon field="designation"></p-sortIcon>
+            </th>
+            <th pSortableColumn="status">
+              Status
+              <p-sortIcon field="status"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-employee>
+          <tr>
+            <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.designation }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="{
+                'status-active': employee.status === 'Active',
+                'status-inactive': employee.status !== 'Active'
+              }">
+                {{ employee.status }}
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="5">No recent employees found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  </ng-container>
+
+</div>

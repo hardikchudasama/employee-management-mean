@@ -9,6 +9,7 @@ import { guestGuard } from './guards/guest-guard';
 import { Register } from './components/register/register';
 import { adminGuard } from './guards/admin-guard-guard';
 import { UserList } from './components/user-list/user-list';
+import { Dashboard } from './dashboard/dashboard';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,11 @@ export const routes: Routes = [
       {
         path: 'users',
         component: UserList,
+        canActivate: [adminGuard]
+      },
+      {
+        path: 'dashboard',
+        component: Dashboard,
         canActivate: [adminGuard]
       }
     ]

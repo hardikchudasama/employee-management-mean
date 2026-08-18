@@ -8,6 +8,13 @@
     </div>
 
     <div class="nav-links" [class.open]="mobileMenuOpen">
+      @if (isAdmin) {
+        <a class="nav-item" routerLink="/dashboard" routerLinkActive="active" (click)="closeMobileMenu()">
+          <span class="nav-icon pi pi-chart-bar"></span>
+          <span>Dashboard</span>
+        </a>
+      }
+
       <a class="nav-item" routerLink="/employees" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">
         <span class="nav-icon pi pi-users"></span>
         <span>Employees</span>

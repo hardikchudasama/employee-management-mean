@@ -10,7 +10,10 @@ const dashboardRoutes = require('./routes/dashboard.route');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: [
+    'https://employee-management-mean-7gt1.vercel.app',
+    'http://localhost:4200'
+  ],
   credentials: true
 }));
 app.use(express.json());

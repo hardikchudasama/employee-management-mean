@@ -55,11 +55,24 @@ const getAllEmployees = async (req, res) => {
 
     // Search
     if (search.trim()) {
+      const searchTerm = search.trim();
+      const regex = new RegExp(searchTerm, 'i');
+
       filter.$or = [
-        { firstName: { $regex: search.trim(), $options: 'i' } },
-        { lastName: { $regex: search.trim(), $options: 'i' } },
-        { email: { $regex: search.trim(), $options: 'i' } },
-        { designation: { $regex: search.trim(), $options: 'i' } },
+        { firstName: regex },
+        { lastName: regex },
+        { email: regex },
+        { designation: regex },
+        // Add full name search by concatenating firstName and lastName
+        {
+          $expr: {
+            $regexMatch: {
+              input: { $concat: ['$firstName', ' ', '$lastName'] },
+              regex: searchTerm,
+              options: 'i',
+            },
+          },
+        },
       ];
     }
 

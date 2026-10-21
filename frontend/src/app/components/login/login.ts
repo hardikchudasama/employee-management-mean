@@ -55,7 +55,12 @@ export class Login {
             JSON.stringify(response.data.user)
           );
 
-          this.router.navigate(['/employees']);
+          // Check user role and redirect accordingly
+          if (response.data.user && response.data.user.role === 'admin') {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.router.navigate(['/employees']);
+          }
         }
       }
     });

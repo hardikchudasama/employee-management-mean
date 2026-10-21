@@ -18,6 +18,10 @@ You can register a new account directly on the app, or use the test credentials 
   * **Email:** `admin@example.com` *(or create one via register)*
   * **Password:** `password123`
 
+* **Regular User:**
+  * **Email:** `user@example.com` *(or register a new user)*
+  * **Password:** `password123`
+
 ---
 
 ## 🚀 Features
